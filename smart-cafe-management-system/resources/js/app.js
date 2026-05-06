@@ -1,2 +1,1 @@
-//
-import "./bootstrap";
+// JS entry point
