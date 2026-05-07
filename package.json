@@ -3,7 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
+        "prebuild": "node scripts/ensure-vite-entries.js",
+        "build": "node scripts/ensure-vite-entries.js && vite build",
         "dev": "vite"
     },
     "devDependencies": {
