@@ -53,7 +53,7 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        $message = $user->is_admin 
+        $message = $user->is_admin
             ? 'Admin account created successfully.'
             : 'Staff account created successfully. You can now create orders.';
 

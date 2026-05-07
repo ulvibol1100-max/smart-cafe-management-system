@@ -23,7 +23,7 @@
             <div class="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
                 <div class="aspect-video bg-stone-100">
                     @if ($product->image_path)
-                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
+                        <img src="{{ Storage::url($product->image_path) }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
                     @else
                         <div class="flex h-full items-center justify-center text-sm text-stone-400">No image</div>
                     @endif

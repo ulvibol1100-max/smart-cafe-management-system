@@ -16,8 +16,8 @@ class OrderController extends Controller
     public function index(Request $request): View
     {
         $orders = Order::with('customer')
-            ->when($request->date, fn ($query, $date) => $query->whereDate('created_at', $date))
-            ->when($request->status, fn ($query, $status) => $query->where('status', $status))
+            ->when($request->date, fn($query, $date) => $query->whereDate('created_at', $date))
+            ->when($request->status, fn($query, $status) => $query->where('status', $status))
             ->latest()
             ->paginate(10)
             ->withQueryString();

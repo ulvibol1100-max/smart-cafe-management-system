@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
         /** @var User $user */
         $user = auth()->user();
         return $user->is_admin
-          ? app(DashboardController::class)->__invoke()
+            ? app(DashboardController::class)->__invoke()
             : redirect()->route('orders.create');
     })->name('dashboard');
 
@@ -44,4 +44,4 @@ Route::middleware('auth')->group(function () {
         Route::resource('customers', CustomerController::class)->except('show');
         Route::resource('staff', StaffController::class)->except('show');
     });
-}); 
+});
