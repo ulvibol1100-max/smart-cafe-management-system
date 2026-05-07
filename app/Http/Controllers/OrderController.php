@@ -70,6 +70,8 @@ class OrderController extends Controller
 
     public function edit(Order $order): View
     {
+        abort_unless(auth()->user()?->is_admin, 403);
+
         return view('orders.edit', [
             'order' => $order->load('products'),
             'products' => Product::orderBy('category')->orderBy('name')->get(),
@@ -78,6 +80,8 @@ class OrderController extends Controller
 
     public function update(Request $request, Order $order): RedirectResponse
     {
+        abort_unless(auth()->user()?->is_admin, 403);
+
         $data = $this->validatedOrder($request);
         $wasCompleted = $order->status === 'completed';
 
@@ -105,6 +109,8 @@ class OrderController extends Controller
 
     public function complete(Order $order): RedirectResponse
     {
+        abort_unless(auth()->user()?->is_admin, 403);
+
         if ($order->status !== 'completed') {
             $order->update(['status' => 'completed']);
             $order->customer->increment('loyalty_points', (int) floor((float) $order->total_price / 10));

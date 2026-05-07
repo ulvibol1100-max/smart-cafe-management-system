@@ -30,7 +30,7 @@
                             ]
                             : [
                                 ['New Order', 'orders.create'],
-                                ['Orders', 'orders.index'],
+                                ['Order History', 'orders.index'],
                             ];
                     @endphp
                     @foreach ($links as [$label, $route])

@@ -46,15 +46,20 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        $data['is_admin'] = ! User::query()->exists();
+        // First user is admin, all subsequent users are staff
+        $data['is_admin'] = !User::query()->exists();
         $user = User::create($data);
 
         Auth::login($user);
         $request->session()->regenerate();
 
+        $message = $user->is_admin 
+            ? 'Admin account created successfully.'
+            : 'Staff account created successfully. You can now create orders.';
+
         return redirect()
             ->route($user->is_admin ? 'dashboard' : 'orders.create')
-            ->with('success', 'Account created. The first registered user becomes admin. Later users become staff.');
+            ->with('success', $message);
     }
 
     public function logout(Request $request): RedirectResponse

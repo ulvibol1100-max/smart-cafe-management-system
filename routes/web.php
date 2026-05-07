@@ -26,9 +26,22 @@ Route::middleware('auth')->group(function () {
           ? app(DashboardController::class)->__invoke()
             : redirect()->route('orders.create');
     })->name('dashboard');
-    Route::resource('products', ProductController::class)->except('show');
-    Route::resource('customers', CustomerController::class)->except('show');
-    Route::patch('orders/{order}/complete', [OrderController::class, 'complete'])->name('orders.complete');
-    Route::resource('orders', OrderController::class);
-    Route::resource('staff', StaffController::class)->except('show');
+
+    // Staff can create orders and view order history
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    // Admin only routes
+    Route::middleware('admin')->group(function () {
+        Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+        Route::patch('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+        Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+        Route::patch('/orders/{order}/complete', [OrderController::class, 'complete'])->name('orders.complete');
+
+        Route::resource('products', ProductController::class)->except('show');
+        Route::resource('customers', CustomerController::class)->except('show');
+        Route::resource('staff', StaffController::class)->except('show');
+    });
 }); 
