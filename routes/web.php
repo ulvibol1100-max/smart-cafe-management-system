@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StaffController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -19,7 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/', function () {
-        return auth()->user()->is_admin
+        /** @var User $user */
+        $user = auth()->user();
+        return $user->is_admin
           ? app(DashboardController::class)->__invoke()
             : redirect()->route('orders.create');
     })->name('dashboard');
@@ -28,4 +31,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('orders/{order}/complete', [OrderController::class, 'complete'])->name('orders.complete');
     Route::resource('orders', OrderController::class);
     Route::resource('staff', StaffController::class)->except('show');
-});
+}); 

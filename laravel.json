@@ -1,0 +1,9 @@
+{
+    "env": ".env",
+    "routes": "routes/web.php",
+    "views": "resources/views",
+    "middleware": {
+        "auth": "Illuminate\\Auth\\Middleware\\Authenticate",
+        "guest": "Illuminate\\Auth\\Middleware\\RedirectIfAuthenticated"
+    }
+}

@@ -9,6 +9,7 @@ use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,20 +21,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::firstOrCreate([
-            'email' => 'admin@smartcafe.test',
+            'email' => 'ulviboladmin@smartcafe.test',
         ], [
-            'name' => 'Cafe Admin',
-            'password' => 'password',
+            'name' => 'UL VIBOL',
+            'password' => Hash::make('bol112233'),
             'is_admin' => true,
         ]);
 
-        User::firstOrCreate([
-            'email' => 'staff@smartcafe.test',
-        ], [
-            'name' => 'Cafe Staff',
-            'password' => 'password',
-            'is_admin' => false,
-        ]);
 
         $products = collect([
             ['name' => 'Hot Latte', 'price' => 3.50, 'category' => 'Coffee'],
@@ -42,12 +36,12 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Chocolate Frappe', 'price' => 4.25, 'category' => 'Drink'],
             ['name' => 'Croissant', 'price' => 2.40, 'category' => 'Food'],
             ['name' => 'Chicken Sandwich', 'price' => 5.25, 'category' => 'Food'],
-        ])->map(fn ($product) => Product::firstOrCreate(['name' => $product['name']], $product));
+        ])->map(fn($product) => Product::firstOrCreate(['name' => $product['name']], $product));
 
         $customers = collect([
             ['name' => 'Sokha Lim', 'phone' => '010 123 456', 'loyalty_points' => 8],
             ['name' => 'Dara Chen', 'phone' => '012 987 654', 'loyalty_points' => 14],
-        ])->map(fn ($customer) => Customer::firstOrCreate(['phone' => $customer['phone']], $customer));
+        ])->map(fn($customer) => Customer::firstOrCreate(['phone' => $customer['phone']], $customer));
 
         Staff::firstOrCreate(['name' => 'Vibol', 'role' => 'Barista'], ['shift' => 'Morning']);
         Staff::firstOrCreate(['name' => 'Malis', 'role' => 'Cashier'], ['shift' => 'Evening']);
