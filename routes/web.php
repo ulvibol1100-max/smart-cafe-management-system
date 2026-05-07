@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', function () {
         return auth()->user()->is_admin
-            ? app(DashboardController::class)()
+          ? app(DashboardController::class)->__invoke()
             : redirect()->route('orders.create');
     })->name('dashboard');
     Route::resource('products', ProductController::class)->except('show');
