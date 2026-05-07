@@ -1,11 +1,11 @@
 FROM php:8.4-cli
 
-RUN apt-get update && apt-get install -y `\
-    curl unzip git libpng-dev libonig-dev `\
-    libxml2-dev zip `\
+RUN apt-get update && apt-get install -y \
+    curl unzip git libpng-dev libonig-dev \
+    libxml2-dev zip \
     && docker-php-ext-install pdo pdo_mysql mbstring
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - `\
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
