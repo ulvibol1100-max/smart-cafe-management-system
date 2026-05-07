@@ -19,7 +19,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN npm install && npm run build
 
 RUN cp .env.example .env && php artisan key:generate
-RUN touch database/database.sqlite && php artisan migrate --force
+RUN touch database/database.sqlite && php artisan migrate --force && php artisan db:seed --force
 
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
