@@ -21,13 +21,6 @@
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         @forelse ($products as $product)
             <div class="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-sm">
-                <div class="aspect-video bg-stone-100">
-                    @if ($product->image_path)
-                        <img src="{{ Storage::url($product->image_path) }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
-                    @else
-                        <div class="flex h-full items-center justify-center text-sm text-stone-400">No image</div>
-                    @endif
-                </div>
                 <div class="p-4">
                     <p class="text-xs font-semibold uppercase tracking-wider text-amber-700">{{ $product->category }}</p>
                     <h2 class="mt-1 font-bold">{{ $product->name }}</h2>
