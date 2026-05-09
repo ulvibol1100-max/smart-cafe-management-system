@@ -6,6 +6,7 @@
             <div class="mt-4 rounded-md bg-stone-100 p-3 text-sm text-stone-700">
                 <p><strong>Admin:</strong> admin@smartcafe.test / password</p>
                 <p><strong>Staff:</strong> staff@smartcafe.test / password</p>
+                <p class="mt-2 border-t border-stone-300 pt-2"><strong>Test Account:</strong> ulviboladmin@smartcafe.test / bol112233</p>
             </div>
             <form method="POST" action="{{ route('login') }}" class="mt-6 space-y-4">
                 @csrf
